@@ -1,0 +1,158 @@
+/* ---------- Formulário ---------- */
+.form-livro {
+    max-width: 560px;
+    margin: 2.5rem auto;
+    padding: 2rem;
+    background: #17140f;
+    border: 1px solid rgba(255, 255, 255, .08);
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, .45);
+}
+
+.form-livro h1 {
+    font-family: "Fraunces", serif;
+    font-size: 1.75rem;
+    margin-bottom: 1.5rem;
+}
+
+.form-livro .campo {
+    margin-bottom: 1rem;
+}
+
+.form-livro label {
+    display: block;
+    font-weight: 500;
+    margin-bottom: .25rem;
+}
+
+.form-livro .erro {
+    color: #ff6b7a;
+    font-size: .875rem;
+    margin-top: .25rem;
+}
+
+.form-livro .acoes {
+    display: flex;
+    gap: .5rem;
+    margin-top: 1.5rem;
+}
+
+/* ---------- Layout compartilhado ---------- */
+.geral {
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1rem;
+}
+
+.botoes {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: .75rem;
+    margin-top: 2rem;
+}
+
+.botoes .btn {
+    padding: .6rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: transform .15s ease, box-shadow .15s ease;
+}
+
+.botoes .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, .4);
+}
+
+/* ---------- Tela de sucesso ---------- */
+.sucesso {
+    width: 100%;
+    max-width: 480px;
+    padding: 2.5rem 2rem;
+    text-align: center;
+    background: #17140f;
+    border: 1px solid rgba(255, 255, 255, .08);
+    border-radius: 16px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, .45);
+    animation: entrada .4s ease-out;
+}
+
+.sucesso-icone {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 1.25rem;
+    display: grid;
+    place-items: center;
+    font-size: 2rem;
+    color: #4ade80;
+    background: rgba(74, 222, 128, .12);
+    border: 2px solid #4ade80;
+    border-radius: 50%;
+}
+
+.sucesso h1 {
+    font-size: 1.75rem;
+    margin-bottom: .5rem;
+}
+
+.sucesso p {
+    color: rgba(255, 255, 255, .7);
+    margin-bottom: 0;
+}
+
+/* ---------- Acesso negado (não logado) ---------- */
+
+.aviso-login {
+    width: 100%;
+    max-width: 420px;
+    padding: 2rem;
+    font-family: inherit;
+    background: #17140f;
+    border: 1px solid rgba(255, 255, 255, .1);
+    border-radius: 8px;
+}
+
+.aviso-login h1 {
+    font-family: "Fraunces", serif;
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-bottom: .5rem;
+}
+
+.aviso-login p {
+    margin-bottom: 1.5rem;
+    opacity: .7;
+}
+
+.aviso-acoes {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+}
+
+.aviso-link {
+    color: inherit;
+    opacity: .7;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.aviso-link:hover {
+    opacity: 1;
+}
+
+
+
+
+/* ---------- Animação e responsivo ---------- */
+@keyframes entrada {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 480px) {
+    .sucesso { padding: 2rem 1.25rem; }
+    .botoes .btn { width: 100%; }
+}

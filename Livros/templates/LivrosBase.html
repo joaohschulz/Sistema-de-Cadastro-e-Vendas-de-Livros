@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+Pagina Inicial
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/LivrosBase.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+{% for livro in livros %}
+  <div class="card" style="width: 14rem;">
+    <img class="card-img-top" src="{{ livro.imagem.url }}"
+      alt="Card image cap">
+    <div class="card-body">
+      <h5 class="card-title">{{ livro.titulo }}</h5>
+      <p class="card-text">R$ {{ livro.valor }}</p>
+      <a href=""
+        class="btn btn-primary" target="_blank">Comprar</a>
+    </div>
+  </div>
+{% endfor %}
+
+
+</div>
+{% endblock %}

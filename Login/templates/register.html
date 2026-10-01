@@ -1,0 +1,71 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,500&family=DM+Sans:wght@400;500&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+</head>
+
+<body>
+    <div class="tela-login">
+
+        <div class="coluna-form">
+            <div class="topo">
+                <a href="{% url 'home' %}" class="marca">eBook Summarize</a>
+            </div>
+
+            <div class="centro-form">
+                <form method="post" class="login-card">
+                    {% csrf_token %}
+
+                    <h3>Register</h3>
+
+                    {% if form.errors %}
+                    <p class="aviso">Verifique os dados informados.</p>
+                    {% endif %}
+
+                    <div class="campo">
+                        {{ form.username.label_tag }}
+                        {{ form.username }}
+                    </div>
+
+                    <div class="campo">
+                        {{ form.password1.label_tag }}
+                        {{ form.password1 }}
+                    </div>
+
+                    <div class="campo">
+                        {{ form.password2.label_tag }}
+                        {{ form.password2 }}
+                    </div>
+                    <p>Você já tem uma conta? <a href="{% url 'login' %}">Faça seu login aqui!</a></p>
+
+                    <button class="botao-entrar" type="submit">Register</button>
+                    {% for field, errors in form.errors.items %}
+                    {% for error in errors %}
+                    <p class="aviso">
+                        {{error}}
+                    </p>
+                        {% endfor %}
+                    {% endfor %}
+                </form>
+            </div>
+        </div>
+
+        <div class="coluna-imagem">
+            <img src="https://images.unsplash.com/photo-1651833826115-7530e72ce504?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8ZnVuZG8lMjBwcmV0byUyMDRrfGVufDB8fDB8fHww"
+                alt="Login image">
+        </div>
+
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Cadastrar livro{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/livro_form.css' %}">
+{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+<section class="form-livro">
+    <h1>Cadastrar novo livro</h1>
+
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+    {% endfor %}
+    {% endif %}
+    <form method="post" enctype="multipart/form-data" novalidate>
+        {% csrf_token %}
+        <div class="campo">
+            {{ form }}
+        </div>
+
+        <div class="acoes">
+            <button type="submit" class="btn btn-warning">Salvar livro</button>
+            <a href="{% url 'livros' %}" class="btn btn-outline-secondary">Cancelar</a>
+        </div>
+    </form>
+</section>
+{% else %}
+<section class="geral">
+    <div class="aviso-login">
+        <h1>Acesso restrito</h1>
+        <p>Entre na sua conta para cadastrar livros.</p>
+
+        <div class="aviso-acoes">
+            <a href="{% url 'login' %}?next={{ request.path }}" class="btn btn-warning">Entrar</a>
+            <a href="{% url 'home' %}" class="aviso-link">Voltar aos livros</a>
+        </div>
+    </div>
+</section>
+{% endif %}
+{% endblock %}

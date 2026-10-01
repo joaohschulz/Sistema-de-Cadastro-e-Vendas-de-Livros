@@ -1,0 +1,65 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,500&family=DM+Sans:wght@400;500&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+</head>
+
+<body>
+    <div class="tela-login">
+
+        <div class="coluna-form">
+            <div class="topo">
+                <a href="{% url 'home' %}" class="marca">eBook Here</a>
+            </div>
+
+            <div class="centro-form">
+                <form method="post" action="{% url 'login' %}" class="login-card">
+                    {% csrf_token %}
+
+                    <h3>Log in</h3>
+
+                    {% if form.errors %}
+                    <p class="aviso">Usuário ou senha inválidos.</p>
+                    {% endif %}
+
+        
+
+                    <div class="campo">
+                        {{ form.username.label_tag }}
+                        {{ form.username }}
+                    </div>
+
+                    <div class="campo">
+                        {{ form.password.label_tag }}
+                        {{ form.password }}
+                    </div>
+
+                    <input type="hidden" name="next" value="{% url 'home' %}">
+
+                    <button class="botao-entrar" type="submit">Login</button>
+
+                    <p><a href="#!">Forgot password?</a></p>
+                    <p>Don't have an account? <a href="{% url 'register' %}">Register here</a></p>
+                </form>
+            </div>
+        </div>
+
+        <div class="coluna-imagem">
+            <img src="https://images.unsplash.com/photo-1651833826115-7530e72ce504?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8ZnVuZG8lMjBwcmV0byUyMDRrfGVufDB8fDB8fHww"
+                alt="Login image">
+        </div>
+
+    </div>
+</body>
+
+</html>

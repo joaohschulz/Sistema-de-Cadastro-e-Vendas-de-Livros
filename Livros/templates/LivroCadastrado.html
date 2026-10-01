@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Livro cadastrado{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/livro_form.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="geral">
+    <div class="sucesso" role="alert">
+        <div class="sucesso-icone">✓</div>
+        <h1>Livro cadastrado!</h1>
+        <p>O seu livro foi cadastrado com sucesso. Quer adicionar mais algum?</p>
+
+        <div class="botoes">
+            <a href="{% url 'livros' %}" class="btn btn-primary">Cadastrar outro livro</a>
+            <a href="{% url 'home' %}" class="btn btn-outline-light">Voltar</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
