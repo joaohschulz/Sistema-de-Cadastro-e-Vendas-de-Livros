@@ -9,14 +9,18 @@
 
 {% block content %}
 <div class="geral">
-    <div class="sucesso" role="alert">
-        <div class="sucesso-icone">✓</div>
-        <h1>Livro cadastrado!</h1>
-        <p>O seu livro foi cadastrado com sucesso. Quer adicionar mais algum?</p>
+    <div class="sucesso" role="status">
+        <svg class="sucesso-icone" viewBox="0 0 56 56" aria-hidden="true" focusable="false">
+            <circle cx="28" cy="28" r="26" />
+            <path d="M17 29 l8 8 l14 -17" />
+        </svg>
 
-        <div class="botoes">
-            <a href="{% url 'livros' %}" class="btn btn-primary">Cadastrar outro livro</a>
-            <a href="{% url 'home' %}" class="btn btn-outline-light">Voltar</a>
+        <h1>Livro cadastrado</h1>
+        <p>Ele já aparece no catálogo.</p>
+
+        <div class="sucesso-acoes">
+            <a href="{% url 'livros' %}" class="btn btn-warning">Cadastrar outro livro</a>
+            <a href="{% url 'home' %}" class="aviso-link">Ver o catálogo</a>
         </div>
     </div>
 </div>

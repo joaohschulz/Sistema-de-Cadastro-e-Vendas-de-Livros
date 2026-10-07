@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block title %}
-Pagina Inicial
+Catálogo
 {% endblock %}
 
 {% block extra_css %}
@@ -9,20 +9,34 @@ Pagina Inicial
 {% endblock %}
 
 {% block content %}
-<div class="container">
-{% for livro in livros %}
-  <div class="card" style="width: 14rem;">
-    <img class="card-img-top" src="{{ livro.imagem.url }}"
-      alt="Card image cap">
-    <div class="card-body">
-      <h5 class="card-title">{{ livro.titulo }}</h5>
-      <p class="card-text">R$ {{ livro.valor }}</p>
-      <a href=""
-        class="btn btn-primary" target="_blank">Comprar</a>
-    </div>
+<section class="catalogo-pagina">
+  <header class="catalogo-topo">
+    <h1>Catálogo</h1>
+    <p>{{ livros|length }} livro{{ livros|length|pluralize }}</p>
+  </header>
+
+  {% if livros %}
+  <ul class="catalogo">
+    {% for livro in livros %}
+    <li class="livro">
+      <div class="livro-capa">
+        <img src="{{ livro.imagem.url }}" alt="Capa de {{ livro.titulo }}" loading="lazy">
+      </div>
+      <div class="livro-info">
+        <h2 class="livro-titulo">{{ livro.titulo }}</h2>
+        <p class="livro-preco">R$ {{ livro.valor|floatformat:2 }}</p>
+        {# Depende de backend: apontar para a rota de compra do livro #}
+        <a href="" class="livro-comprar" aria-label="Comprar {{ livro.titulo }}">Comprar</a>
+      </div>
+    </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+  <div class="catalogo-vazio">
+    <h2>Nenhum livro cadastrado ainda</h2>
+    <p>Os livros cadastrados aparecem aqui, com capa e preço.</p>
+    <a href="{% url 'livros' %}">Cadastrar o primeiro livro</a>
   </div>
-{% endfor %}
-
-
-</div>
+  {% endif %}
+</section>
 {% endblock %}

@@ -1,71 +1,47 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="pt-BR">
+{% extends "auth_base.html" %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,500&family=DM+Sans:wght@400;500&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'css/login.css' %}">
-</head>
+{% block title %}Criar conta{% endblock %}
 
-<body>
-    <div class="tela-login">
+{% block painel_frase %}Crie uma conta para cadastrar livros no catálogo.{% endblock %}
 
-        <div class="coluna-form">
-            <div class="topo">
-                <a href="{% url 'home' %}" class="marca">eBook Summarize</a>
-            </div>
+{% block auth_conteudo %}
+<form method="post" class="auth-form">
+    {% csrf_token %}
 
-            <div class="centro-form">
-                <form method="post" class="login-card">
-                    {% csrf_token %}
+    <h1>Criar conta</h1>
+    <p class="auth-lead">Escolha um usuário e uma senha.</p>
 
-                    <h3>Register</h3>
+    {% if form.errors %}
+    <p class="aviso" role="alert">Há campos com problema. Corrija o que está indicado abaixo.</p>
+    {% endif %}
 
-                    {% if form.errors %}
-                    <p class="aviso">Verifique os dados informados.</p>
-                    {% endif %}
+    {{ form.non_field_errors }}
 
-                    <div class="campo">
-                        {{ form.username.label_tag }}
-                        {{ form.username }}
-                    </div>
-
-                    <div class="campo">
-                        {{ form.password1.label_tag }}
-                        {{ form.password1 }}
-                    </div>
-
-                    <div class="campo">
-                        {{ form.password2.label_tag }}
-                        {{ form.password2 }}
-                    </div>
-                    <p>Você já tem uma conta? <a href="{% url 'login' %}">Faça seu login aqui!</a></p>
-
-                    <button class="botao-entrar" type="submit">Register</button>
-                    {% for field, errors in form.errors.items %}
-                    {% for error in errors %}
-                    <p class="aviso">
-                        {{error}}
-                    </p>
-                        {% endfor %}
-                    {% endfor %}
-                </form>
-            </div>
-        </div>
-
-        <div class="coluna-imagem">
-            <img src="https://images.unsplash.com/photo-1651833826115-7530e72ce504?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8ZnVuZG8lMjBwcmV0byUyMDRrfGVufDB8fDB8fHww"
-                alt="Login image">
-        </div>
-
+    <div class="campo">
+        {{ form.username.label_tag }}
+        {{ form.username }}
+        {{ form.username.errors }}
+        {% if form.username.help_text %}<div class="ajuda">{{ form.username.help_text }}</div>{% endif %}
     </div>
-</body>
 
-</html>
+    <div class="campo">
+        {{ form.password1.label_tag }}
+        {{ form.password1 }}
+        {{ form.password1.errors }}
+        {% if form.password1.help_text %}<div class="ajuda">{{ form.password1.help_text }}</div>{% endif %}
+    </div>
+
+    <div class="campo">
+        {{ form.password2.label_tag }}
+        {{ form.password2 }}
+        {{ form.password2.errors }}
+        {% if form.password2.help_text %}<div class="ajuda">{{ form.password2.help_text }}</div>{% endif %}
+    </div>
+
+    <button class="botao-principal" type="submit">Criar conta</button>
+
+    <div class="auth-links">
+        <p>Já tem uma conta? <a href="{% url 'login' %}">Entrar</a></p>
+    </div>
+</form>
+{% endblock %}

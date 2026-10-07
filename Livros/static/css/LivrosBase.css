@@ -1,15 +1,169 @@
-.card {
-    background-color: #1f1b14;
-    color: #ebe5d8;
-    border: 1px solid #322d20;
-    margin: 1rem;
+/* ==========================================================================
+   Catálogo de livros (LivrosBase.html)
+   As variáveis (--surface-2, --line, --accent...) vêm do style.css.
+   ========================================================================== */
+
+.catalogo-pagina {
+    padding: 2.5rem 6vw 4rem;
 }
 
-
-.container {
+.catalogo-topo {
     display: flex;
-    justify-content: flex-start;
+    align-items: baseline;
+    justify-content: space-between;
     flex-wrap: wrap;
-    flex-direction: row;
-    align-items: center;
+    gap: 0.5rem 1.5rem;
+    margin-bottom: 2.5rem;
+    padding-bottom: 1.25rem;
+    border-bottom: 1px solid var(--line);
+}
+
+.catalogo-topo h1 {
+    font-family: var(--fonte-titulo);
+    font-weight: 500;
+    font-size: 2rem;
+    line-height: 1.1;
+}
+
+.catalogo-topo p {
+    color: var(--muted);
+    font-size: 0.9rem;
+}
+
+/* ---------- Grade ---------- */
+
+.catalogo {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(11.5rem, 1fr));
+    gap: 2.5rem 1.75rem;
+}
+
+/* ---------- Livro ---------- */
+
+.livro {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Todas as capas na mesma proporção, qualquer que seja o tamanho da imagem enviada */
+.livro-capa {
+    position: relative;
+    aspect-ratio: 2 / 3;
+    overflow: hidden;
+    background-color: var(--surface-2);
+    border-radius: 2px 6px 6px 2px;
+    box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.45);
+    transition: transform 0.2s ease;
+}
+
+.livro-capa img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Vinco da lombada na lateral esquerda da capa */
+.livro-capa::after {
+    content: "";
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 7%;
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0.35), rgba(255, 255, 255, 0.08) 45%, transparent);
+    pointer-events: none;
+}
+
+.livro:hover .livro-capa {
+    transform: translateY(-4px);
+}
+
+.livro-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding-top: 1rem;
+}
+
+.livro-titulo {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    overflow: hidden;
+    font-family: var(--fonte-titulo);
+    font-weight: 500;
+    font-size: 1.05rem;
+    line-height: 1.3;
+    /* reserva sempre duas linhas para os botões ficarem alinhados */
+    min-height: 2.6em;
+}
+
+.livro-preco {
+    margin: 0.35rem 0 auto;
+    color: var(--accent);
+    font-weight: 500;
+}
+
+.livro-comprar {
+    margin-top: 1rem;
+    padding: 0.55rem 0.75rem;
+    border: 1px solid var(--accent);
+    border-radius: 4px;
+    color: var(--accent);
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.livro-comprar:hover {
+    background-color: var(--accent);
+    color: var(--bg);
+}
+
+/* ---------- Catálogo vazio ---------- */
+
+.catalogo-vazio {
+    max-width: 28rem;
+    padding: 2rem 0;
+}
+
+.catalogo-vazio h2 {
+    margin-bottom: 0.5rem;
+    font-family: var(--fonte-titulo);
+    font-weight: 500;
+    font-size: 1.4rem;
+}
+
+.catalogo-vazio p {
+    margin-bottom: 1.25rem;
+    color: var(--muted);
+}
+
+.catalogo-vazio a {
+    color: var(--accent);
+    text-underline-offset: 3px;
+}
+
+.catalogo-vazio a:hover {
+    color: var(--accent-hover);
+}
+
+/* ---------- Celular ---------- */
+
+@media (max-width: 640px) {
+    .catalogo-pagina {
+        padding: 1.75rem 1.25rem 3rem;
+    }
+
+    .catalogo {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 2rem 1rem;
+    }
+
+    .livro-titulo {
+        font-size: 0.95rem;
+    }
 }

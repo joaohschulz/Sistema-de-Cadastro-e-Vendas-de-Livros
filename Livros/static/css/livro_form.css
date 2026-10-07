@@ -1,43 +1,186 @@
-/* ---------- Formulário ---------- */
+
+
 .form-livro {
-    max-width: 560px;
+    max-width: 34rem;
     margin: 2.5rem auto;
-    padding: 2rem;
-    background: #17140f;
-    border: 1px solid rgba(255, 255, 255, .08);
-    border-radius: 12px;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, .45);
+    padding: 2.5rem 2.25rem;
+    background-color: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 8px;
 }
 
 .form-livro h1 {
-    font-family: "Fraunces", serif;
-    font-size: 1.75rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.75rem;
+    font-family: var(--fonte-titulo);
+    font-weight: 500;
+    font-size: 2rem;
+    line-height: 1.1;
 }
 
-.form-livro .campo {
-    margin-bottom: 1rem;
+.form-livro h1::before {
+    content: "";
+    display: block;
+    width: 2.5rem;
+    height: 3px;
+    margin-bottom: 1.25rem;
+    background: var(--accent);
+}
+
+.form-livro .campo > div,
+.form-livro .campo > p {
+    margin-bottom: 1.25rem;
 }
 
 .form-livro label {
     display: block;
+    margin-bottom: 0.4rem;
+    color: var(--text);
+    font-size: 0.9rem;
     font-weight: 500;
-    margin-bottom: .25rem;
 }
 
-.form-livro .erro {
-    color: #ff6b7a;
-    font-size: .875rem;
-    margin-top: .25rem;
+
+.form-livro input:not([type="file"]):not([type="checkbox"]):not([type="radio"]):not([type="hidden"]),
+.form-livro textarea,
+.form-livro select {
+    width: 100%;
+    padding: 0.8rem 0.95rem;
+    background-color: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    color: var(--text);
+    font-family: inherit;
+    font-size: 1rem;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
 }
+
+.form-livro textarea {
+    min-height: 8rem;
+    resize: vertical;
+}
+
+.form-livro input:not([type="file"]):hover,
+.form-livro textarea:hover,
+.form-livro select:hover {
+    border-color: var(--muted);
+}
+
+.form-livro input:not([type="file"]):focus,
+.form-livro textarea:focus,
+.form-livro select:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(200, 164, 104, 0.25);
+}
+
+.form-livro input:disabled,
+.form-livro textarea:disabled,
+.form-livro select:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+}
+
+.form-livro input[type="file"] {
+    display: block;
+    width: 100%;
+    padding: 0.6rem;
+    background-color: var(--bg);
+    border: 1px dashed var(--line);
+    border-radius: 6px;
+    color: var(--muted);
+    font-family: inherit;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: border-color 0.15s ease;
+}
+
+.form-livro input[type="file"]:hover,
+.form-livro input[type="file"]:focus-visible {
+    border-color: var(--accent);
+}
+
+.form-livro input[type="file"]::file-selector-button {
+    margin-right: 0.85rem;
+    padding: 0.5rem 0.9rem;
+    background-color: transparent;
+    border: 1px solid var(--accent);
+    border-radius: 4px;
+    color: var(--accent);
+    font-family: inherit;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.form-livro input[type="file"]::file-selector-button:hover {
+    background-color: var(--accent);
+    color: var(--bg);
+}
+
+/* Ajuda e erros */
+.form-livro .helptext {
+    margin: 0.3rem 0 0.45rem;
+    color: var(--muted);
+    font-size: 0.8rem;
+    line-height: 1.45;
+}
+
+.form-livro .errorlist,
+.form-livro .erro {
+    list-style: none;
+    margin: 0 0 0.45rem;
+    color: var(--erro);
+    font-size: 0.85rem;
+}
+
+
+.form-livro .campo > div:has(.errorlist) input:not([type="file"]),
+.form-livro .campo > div:has(.errorlist) textarea,
+.form-livro .campo > div:has(.errorlist) select,
+.form-livro .campo > p:has(.errorlist) input:not([type="file"]) {
+    border-color: var(--erro);
+}
+
+.form-livro .alert {
+    margin-bottom: 1.5rem;
+    padding: 0.75rem 1rem;
+    border-radius: 6px;
+    font-size: 0.9rem;
+}
+
+.form-livro .alert-error {
+    color: var(--erro);
+    background-color: rgba(228, 106, 98, 0.12);
+    border: 1px solid rgba(228, 106, 98, 0.45);
+}
+
+.form-livro .alert-success {
+    color: #4ade80;
+    background-color: rgba(74, 222, 128, 0.1);
+    border: 1px solid rgba(74, 222, 128, 0.4);
+}
+
 
 .form-livro .acoes {
     display: flex;
-    gap: .5rem;
-    margin-top: 1.5rem;
+    gap: 0.75rem;
+    margin-top: 1.75rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--line);
+}
+
+.form-livro .acoes .btn {
+    padding: 0.7rem 1.25rem;
+    border-radius: 6px;
+}
+
+.form-livro .acoes .btn-warning {
+    flex: 1;
 }
 
 /* ---------- Layout compartilhado ---------- */
+
 .geral {
     min-height: 70vh;
     display: flex;
@@ -46,84 +189,92 @@
     padding: 2rem 1rem;
 }
 
-.botoes {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: .75rem;
-    margin-top: 2rem;
-}
+/* ---------- Tela de sucesso (LivroCadastrado.html) ---------- */
 
-.botoes .btn {
-    padding: .6rem 1.5rem;
-    border-radius: 8px;
-    font-weight: 500;
-    transition: transform .15s ease, box-shadow .15s ease;
-}
-
-.botoes .btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(0, 0, 0, .4);
-}
-
-/* ---------- Tela de sucesso ---------- */
 .sucesso {
     width: 100%;
-    max-width: 480px;
-    padding: 2.5rem 2rem;
-    text-align: center;
-    background: #17140f;
-    border: 1px solid rgba(255, 255, 255, .08);
-    border-radius: 16px;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, .45);
-    animation: entrada .4s ease-out;
+    max-width: 30rem;
+    padding: 2.5rem 2.25rem;
+    background-color: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    animation: entrada 0.4s ease-out;
 }
 
 .sucesso-icone {
-    width: 64px;
-    height: 64px;
-    margin: 0 auto 1.25rem;
-    display: grid;
-    place-items: center;
-    font-size: 2rem;
-    color: #4ade80;
-    background: rgba(74, 222, 128, .12);
-    border: 2px solid #4ade80;
-    border-radius: 50%;
+    display: block;
+    width: 3.5rem;
+    height: 3.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.sucesso-icone circle {
+    fill: rgba(74, 222, 128, 0.12);
+    stroke: #4ade80;
+    stroke-width: 2;
+}
+
+/* O traço do "certo" se desenha uma única vez */
+.sucesso-icone path {
+    fill: none;
+    stroke: #4ade80;
+    stroke-width: 3;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: 40;
+    stroke-dashoffset: 40;
+    animation: tracar 0.5s 0.3s ease-out forwards;
 }
 
 .sucesso h1 {
+    margin-bottom: 0.5rem;
+    font-family: var(--fonte-titulo);
+    font-weight: 500;
     font-size: 1.75rem;
-    margin-bottom: .5rem;
+    line-height: 1.15;
 }
 
 .sucesso p {
-    color: rgba(255, 255, 255, .7);
     margin-bottom: 0;
+    color: var(--muted);
 }
 
-/* ---------- Acesso negado (não logado) ---------- */
+.sucesso-acoes {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1.25rem;
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--line);
+}
+
+.sucesso-acoes .btn {
+    padding: 0.7rem 1.25rem;
+    border-radius: 6px;
+}
+
+/* ---------- Acesso restrito (não logado) ---------- */
 
 .aviso-login {
     width: 100%;
-    max-width: 420px;
+    max-width: 26rem;
     padding: 2rem;
-    font-family: inherit;
-    background: #17140f;
-    border: 1px solid rgba(255, 255, 255, .1);
+    background-color: var(--surface);
+    border: 1px solid var(--line);
     border-radius: 8px;
 }
 
 .aviso-login h1 {
-    font-family: "Fraunces", serif;
-    font-size: 1.4rem;
-    font-weight: 600;
-    margin-bottom: .5rem;
+    margin-bottom: 0.5rem;
+    font-family: var(--fonte-titulo);
+    font-weight: 500;
+    font-size: 1.5rem;
 }
 
 .aviso-login p {
     margin-bottom: 1.5rem;
-    opacity: .7;
+    color: var(--muted);
 }
 
 .aviso-acoes {
@@ -133,26 +284,51 @@
 }
 
 .aviso-link {
-    color: inherit;
-    opacity: .7;
+    color: var(--muted);
     text-decoration: underline;
     text-underline-offset: 3px;
 }
 
 .aviso-link:hover {
-    opacity: 1;
+    color: var(--text);
 }
 
-
-
-
 /* ---------- Animação e responsivo ---------- */
+
+@keyframes tracar {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
 @keyframes entrada {
-    from { opacity: 0; transform: translateY(12px); }
-    to   { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 @media (max-width: 480px) {
-    .sucesso { padding: 2rem 1.25rem; }
-    .botoes .btn { width: 100%; }
+    .form-livro {
+        margin: 1rem;
+        padding: 1.75rem 1.25rem;
+    }
+
+    .form-livro .acoes {
+        flex-direction: column-reverse;
+    }
+
+    .sucesso {
+        padding: 2rem 1.25rem;
+    }
+
+    .sucesso-acoes {
+        flex-direction: column;
+        align-items: stretch;
+        text-align: center;
+    }
 }

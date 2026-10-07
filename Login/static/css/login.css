@@ -1,192 +1,339 @@
-:root {
-    --bg: #17140f;
-    --surface: #1f1b14;
-    --text: #ebe5d8;
-    --muted: #9c9382;
-    --accent: #c8a468;
-    --line: #322d20;
-    --erro: #d97757;
-}
+/* ==========================================================================
+   Telas de autenticação (login e cadastro)
+   Tokens, fontes, foco e o link "pular" vêm do style.css (carregado antes).
+   ========================================================================== */
 
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
-html,
-body {
-    height: 100%;
-}
-
-body {
-    background-color: var(--bg);
-    color: var(--text);
-    font-family: 'DM Sans', sans-serif;
-}
-
-.tela-login {
-    display: flex;
+.auth-layout {
+    flex: 1;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
     min-height: 100vh;
 }
 
-/* Coluna esquerda: marca + formulário */
-.coluna-form {
-    flex: 1;
+/* ---------- Coluna do formulário ---------- */
+
+.auth-coluna {
     display: flex;
     flex-direction: column;
 }
 
-.topo {
+.auth-topo {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 2rem;
-    padding: 1.5rem 6vw;
+    gap: 1rem;
+    padding: 1.25rem clamp(1.25rem, 5vw, 4rem);
     border-bottom: 1px solid var(--line);
 }
 
-.marca {
-    font-family: 'Fraunces', serif;
-    font-style: italic;
-    font-weight: 500;
-    font-size: 1.5rem;
-    color: var(--text);
+.auth-voltar {
+    color: var(--muted);
+    font-size: 0.9rem;
     text-decoration: none;
-    letter-spacing: 0.01em;
 }
 
-.centro-form {
+.auth-voltar:hover {
+    color: var(--text);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.auth-centro {
     flex: 1;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 2rem;
+    padding: 3rem clamp(1.25rem, 5vw, 4rem);
 }
 
-/* Cartão do formulário */
-.login-card {
+/* O formulário é o foco da tela: um único cartão, sem sombra */
+.auth-bloco {
     width: 100%;
-    max-width: 23rem;
-    padding: 2.5rem;
-    border-radius: 16px;
+    max-width: 26rem;
+    padding: 2.5rem 2.25rem;
     background-color: var(--surface);
     border: 1px solid var(--line);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
-    margin-bottom: 45rem;
+    border-radius: 8px;
 }
 
-.login-card h3 {
-    font-weight: 400;
-    font-size: 1.5rem;
-    letter-spacing: 0.02em;
+.auth-form h1 {
+    font-family: var(--fonte-titulo);
+    font-weight: 500;
+    font-size: 2rem;
+    line-height: 1.1;
+    margin-bottom: 0.5rem;
+}
+
+/* Filete dourado: marca o início do formulário */
+.auth-form h1::before {
+    content: "";
+    display: block;
+    width: 2.5rem;
+    height: 3px;
+    margin-bottom: 1.25rem;
+    background: var(--accent);
+}
+
+.auth-lead {
+    color: var(--muted);
     margin-bottom: 1.75rem;
 }
 
+/* ---------- Campos ---------- */
 
-.aviso {
-    display: block;
-    width: 100%;
-    background-color: rgba(217, 119, 87, 0.12);
-    border: 1px solid rgba(217, 119, 87, 0.4);
-    border-radius: 10px;
-    color: var(--erro);
-    padding: 0.75rem 1rem;
-    font-size: 0.85rem;
-    margin-bottom: 1rem;
-}
-
-.aviso.info {
-    color: var(--muted);
-}
-
-/* Campos */
 .campo {
     margin-bottom: 1.25rem;
 }
 
 .campo label {
     display: block;
-    font-size: 0.85rem;
-    color: var(--muted);
     margin-bottom: 0.4rem;
+    color: var(--text);
+    font-size: 0.9rem;
+    font-weight: 500;
 }
 
 .campo input {
     width: 100%;
-    padding: 0.75rem 1rem;
+    padding: 0.8rem 0.95rem;
     background-color: var(--bg);
     border: 1px solid var(--line);
-    border-radius: 8px;
+    border-radius: 6px;
     color: var(--text);
     font-family: inherit;
     font-size: 1rem;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
 }
 
-.campo input::placeholder {
-    color: var(--muted);
+.campo input:hover {
+    border-color: var(--muted);
 }
 
 .campo input:focus {
     outline: none;
     border-color: var(--accent);
-    box-shadow: 0 0 0 3px rgba(200, 164, 104, 0.2);
+    box-shadow: 0 0 0 3px rgba(200, 164, 104, 0.25);
 }
 
-/* Botão */
-.botao-entrar {
+.campo input:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+}
+
+/* Erro: depois de interagir (navegador) ou quando o servidor devolveu erro */
+.campo input:user-invalid,
+.campo:has(.errorlist) input {
+    border-color: var(--erro);
+}
+
+.errorlist {
+    list-style: none;
+    margin-top: 0.4rem;
+    color: var(--erro);
+    font-size: 0.85rem;
+}
+
+.ajuda {
+    margin-top: 0.45rem;
+    color: var(--muted);
+    font-size: 0.8rem;
+    line-height: 1.45;
+}
+
+.ajuda ul {
+    padding-left: 1.1rem;
+}
+
+/* ---------- Aviso e botão ---------- */
+
+.aviso {
+    margin-bottom: 1.25rem;
+    padding: 0.75rem 1rem;
+    background-color: rgba(228, 106, 98, 0.12);
+    border: 1px solid rgba(228, 106, 98, 0.45);
+    border-radius: 6px;
+    color: var(--erro);
+    font-size: 0.9rem;
+}
+
+.botao-principal {
     width: 100%;
-    padding: 0.85rem;
-    margin: 0.5rem 0 1.5rem;
-    border: none;
-    border-radius: 8px;
+    margin-top: 0.5rem;
+    padding: 0.9rem;
+    border: 0;
+    border-radius: 6px;
     background-color: var(--accent);
     color: var(--bg);
     font-family: inherit;
     font-size: 1rem;
     font-weight: 500;
     cursor: pointer;
-    transition: background-color 0.15s ease;
+    transition: background-color 0.15s ease, transform 0.1s ease;
 }
 
-.botao-entrar:hover,
-.botao-entrar:focus-visible {
-    background-color: #d8b57c;
+.botao-principal:hover {
+    background-color: var(--accent-hover);
 }
 
-/* Links auxiliares */
-.login-card p {
-    font-size: 0.9rem;
-    margin-bottom: 0.5rem;
+.botao-principal:active {
+    transform: translateY(1px);
+}
+
+.botao-principal:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+}
+
+/* ---------- Links auxiliares ---------- */
+
+.auth-links {
+    margin-top: 1.75rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--line);
     color: var(--muted);
+    font-size: 0.9rem;
 }
 
-.login-card a {
+.auth-links p + p {
+    margin-top: 0.5rem;
+}
+
+.auth-links a {
     color: var(--accent);
-    text-decoration: none;
+    text-underline-offset: 3px;
 }
 
-.login-card a:hover {
-    color: #d8b57c;
-    text-decoration: underline;
+.auth-links a:hover {
+    color: var(--accent-hover);
 }
 
-/* Coluna direita: imagem */
-.coluna-imagem {
-    flex: 1;
+/* ---------- Painel com a estante ---------- */
+
+.painel {
+    --lombada-vinho: #7b3a2c;
+    --lombada-oliva: #5d5b35;
+    --lombada-ardosia: #3b4750;
+    --lombada-ocre: #a8814a;
+    --lombada-creme: #cfc4ab;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 2.5rem;
+    padding: 3rem clamp(1.5rem, 5vw, 4rem) 3rem;
+    background-color: #120f0a;
+    border-left: 1px solid var(--line);
+    overflow: hidden;
 }
 
-.coluna-imagem img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: left;
-    display: block;
+.painel-frase {
+    max-width: 13ch;
+    font-family: var(--fonte-titulo);
+    font-style: italic;
+    font-weight: 500;
+    font-size: clamp(2.1rem, 3.6vw, 3.4rem);
+    line-height: 1.12;
 }
 
+/* A estante ocupa toda a largura: as lombadas dividem o espaço */
+.estante {
+    display: flex;
+    align-items: flex-end;
+    gap: 3px;
+    height: min(52vh, 28rem);
+    border-bottom: 5px solid var(--accent);
+}
+
+.estante span {
+    position: relative;
+    flex: var(--w) 1 0;
+    min-width: 0;
+    height: calc(var(--h) * 1%);
+    background-color: var(--c);
+    /* luz vinda da esquerda (volume) + etiqueta do título */
+    background-image:
+        linear-gradient(90deg, rgba(255, 255, 255, 0.1), transparent 35%, rgba(0, 0, 0, 0.3)),
+        linear-gradient(rgba(235, 229, 216, 0.16), rgba(235, 229, 216, 0.16));
+    background-size: 100% 100%, 62% 24%;
+    background-position: 0 0, 50% 40%;
+    background-repeat: no-repeat;
+    border-radius: 2px 2px 0 0;
+    animation: subir 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+/* Faixas no topo e na base de cada lombada */
+.estante span::before,
+.estante span::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: rgba(235, 229, 216, 0.3);
+}
+
+.estante span::before {
+    top: 9%;
+}
+
+.estante span::after {
+    bottom: 9%;
+}
+
+.estante span:nth-child(1)  { --h: 62; --w: 1.1;  --c: var(--lombada-vinho); }
+.estante span:nth-child(2)  { --h: 80; --w: 0.8;  --c: var(--lombada-creme); }
+.estante span:nth-child(3)  { --h: 70; --w: 1.4;  --c: var(--lombada-ardosia); }
+.estante span:nth-child(4)  { --h: 90; --w: 0.9;  --c: var(--lombada-ocre); }
+.estante span:nth-child(5)  { --h: 58; --w: 1.2;  --c: var(--lombada-oliva); }
+.estante span:nth-child(6)  { --h: 76; --w: 0.9;  --c: var(--lombada-vinho); }
+.estante span:nth-child(7)  { --h: 95; --w: 1.1;  --c: var(--lombada-ardosia); }
+.estante span:nth-child(8)  { --h: 66; --w: 0.75; --c: var(--lombada-creme); }
+.estante span:nth-child(9)  { --h: 84; --w: 1.4;  --c: var(--lombada-oliva); }
+.estante span:nth-child(10) { --h: 72; --w: 1;    --c: var(--lombada-ocre); }
+.estante span:nth-child(11) { --h: 60; --w: 1.25; --c: var(--lombada-vinho); }
+.estante span:nth-child(12) { --h: 88; --w: 0.8;  --c: var(--lombada-ardosia); }
+.estante span:nth-child(13) { --h: 74; --w: 1.1;  --c: var(--lombada-creme); }
+.estante span:nth-child(14) { --h: 82; --w: 0.95; --c: var(--lombada-oliva); }
+
+/* Entrada única ao carregar: as lombadas sobem em três ondas */
+.estante span:nth-child(3n + 1) { animation-delay: 0.05s; }
+.estante span:nth-child(3n + 2) { animation-delay: 0.12s; }
+.estante span:nth-child(3n)     { animation-delay: 0.19s; }
+
+@keyframes subir {
+    from {
+        opacity: 0;
+        transform: translateY(2rem);
+    }
+}
+
+/* ---------- Celular: a estante vira uma faixa curta no rodapé ---------- */
 
 @media (max-width: 768px) {
-    .coluna-imagem {
+    .auth-layout {
+        grid-template-columns: 1fr;
+        min-height: 0;
+    }
+
+    .auth-centro {
+        padding: 1.5rem 1.25rem 2rem;
+    }
+
+    .auth-bloco {
+        padding: 1.75rem 1.5rem;
+    }
+
+    .painel {
+        padding: 1.5rem 1.25rem;
+        border-left: 0;
+        border-top: 1px solid var(--line);
+    }
+
+    .painel-frase {
         display: none;
+    }
+
+    .estante {
+        height: 6rem;
     }
 }
